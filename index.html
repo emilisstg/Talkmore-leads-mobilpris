@@ -570,7 +570,7 @@ footer { background: var(--hero-bg); padding: 56px 64px 28px; }
       </div>
       <div class="footer-ci">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        info@mobilpris.no
+        <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="10797e767f507d7f72797c606279633e7e7f">[email&#160;protected]</a>
       </div>
       <div class="footer-ci">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.57 3.18 2 2 0 0 1 3.55 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -582,7 +582,7 @@ footer { background: var(--hero-bg); padding: 56px 64px 28px; }
       <ul class="footer-nav">
         <li><a href="#om-oss">Om oss</a></li>
         <li><a href="#kontakt">Kontakt oss</a></li>
-        <li><a href="#">Personvern- og brukervilkår</a></li>
+        <li><a href="#" onclick="showPersonvern(); return false;">Personvern- og brukervilkår</a></li>
       </ul>
     </div>
   </div>
@@ -591,7 +591,7 @@ footer { background: var(--hero-bg); padding: 56px 64px 28px; }
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 // ── FORM VALIDATION ──
 var answers = {};
 
@@ -695,13 +695,31 @@ function submitForm() {
 (function(){
   var nav=document.querySelector('nav');
   var last=window.scrollY;
-  window.addEventListener('scroll',function(){
-    var cur=window.scrollY;
-    if(cur>last&&cur>60){nav.classList.add('hidden');}
-    else{nav.classList.remove('hidden');}
-    last=cur;
-  },{passive:true});
-})();
+  window.ad
+
+<!-- PERSONVERN OVERLAY -->
+<div id="personvernPage" style="display:none; position:fixed; inset:0; background:var(--bg); z-index:999; overflow-y:auto;">
+  <div style="max-width:700px; margin:0 auto; padding:80px 32px 60px;">
+    <button onclick="hidePersonvern()" style="display:inline-flex; align-items:center; gap:8px; background:none; border:none; color:var(--blue-dark); font-family:inherit; font-size:0.95rem; font-weight:600; cursor:pointer; margin-bottom:40px; padding:0;">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+      Tilbake
+    </button>
+    <h1 style="font-size:2rem; font-weight:800; color:var(--text); margin-bottom:16px;">Personvern- og brukervilkår</h1>
+    <div style="display:inline-block; background:var(--blue-dark); color:#fff; border-radius:999px; padding:8px 20px; font-size:0.88rem; font-weight:600; margin-bottom:40px;">
+      🚧 Under construction
+    </div>
+    <p style="color:var(--text-muted); font-size:1rem; line-height:1.7;">Vi jobber med å ferdigstille denne siden. Kom tilbake snart!</p>
+  </div>
+</div>
+
+<script>
+function showPersonvern() {
+  document.getElementById('personvernPage').style.display = 'block';
+  window.scrollTo(0, 0);
+}
+function hidePersonvern() {
+  document.getElementById('personvernPage').style.display = 'none';
+}
 </script>
 </body>
 </html>
