@@ -32,19 +32,24 @@ nav {
   align-items: center;
   justify-content: space-between;
   padding: 18px 64px;
-  background: var(--bg);
-  position: sticky;
+  background: var(--hero-bg);
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 100;
-  border-bottom: 1px solid var(--border);
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  transform: translateY(0);
+  transition: transform 0.32s ease, box-shadow 0.32s ease;
 }
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-decoration: none;
-  color: var(--text);
+nav.hidden {
+  transform: translateY(-100%);
 }
+nav .logo-name { color: var(--white); }
+nav .nav-links a { color: rgba(255,255,255,0.75); }
+nav .nav-links a:hover, nav .nav-links a.active { color: var(--accent); }
+body { padding-top: 62px; }
+nav .logo { text-decoration: none; }
 .logo-bars {
   display: flex;
   align-items: flex-end;
