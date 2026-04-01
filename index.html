@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Gigabytt.no – Mobilabonnement</title>
+<link rel="stylesheet" href="styles.css" />
+<style>
+  /* HERO */
+  .hero {
+    background: var(--hero-bg);
+    padding: 80px 64px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 50% -10%, rgba(143,227,255,0.15) 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.8rem);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.15;
+    max-width: 680px;
+    margin-bottom: 18px;
+  }
+  .hero h1 span { color: var(--accent); }
+  .hero > p {
+    color: rgba(255,255,255,0.7);
+    font-size: 1.05rem;
+    max-width: 500px;
+    line-height: 1.65;
+    margin-bottom: 28px;
+  }
+  .hero-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 26px;
+  }
+  .badge {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    border: 1.5px solid rgba(143,227,255,0.35);
+    border-radius: 999px;
+    padding: 7px 16px;
+    font-size: 0.86rem;
+    color: rgba(255,255,255,0.85);
+    font-weight: 500;
+  }
+  .badge svg { color: var(--accent); }
+  .trust-row {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    margin-bottom: 32px;
+    color: rgba(255,255,255,0.75);
+    font-size: 0.88rem;
+  }
+  .trust-avatar {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c8f0ff, #8fe3ff);
+    border: 2px solid rgba(255,255,255,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .trust-text strong { color: var(--white); display: block; font-size: 0.92rem; }
+  .hero-form {
+    background: rgba(255,255,255,0.06);
+    border: 1.5px solid rgba(143,227,255,0.2);
+    border-radius: 16px;
+    padding: 30px 34px;
+    width: 100%; max-width: 500px;
+    margin-bottom: 48px;
+  }
+  .form-group { margin-bottom: 16px; text-align: left; }
+  .form-group label {
+    display: block;
+    font-size: 0.83rem; font-weight: 600;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 6px;
+  }
+  .form-group label span { color: var(--accent); }
+  .form-group input {
+    width: 100%;
+    padding: 13px 15px;
+    border-radius: 10px; border: none;
+    font-family: inherit; font-size: 0.95rem;
+    background: var(--white); color: #000;
+    outline: none; transition: box-shadow 0.2s;
+  }
+  .form-group input:focus { box-shadow: 0 0 0 3px rgba(143,227,255,0.4); }
+
+  @media (max-width: 860px) {
+    .hero { padding: 60px 22px 0; }
+    .hero-form { padding: 24px 22px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="logo">
+    <div class="logo-bars"><span></span><span></span><span></span><span></span></div>
+    <span class="logo-name">Gigabytt.no</span>
+  </a>
+  <div class="nav-links">
+    <a href="om-oss.html">Om oss</a>
+    <a href="kontakt.html">Kontakt oss</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>Få tilbud på <span>mobilabonnement</span></h1>
+  <p>Vi sammenligner mobilabonnement for deg. Gjennom en enkel søknad finner vi et tilbud som passer dine behov.</p>
+  <div class="hero-badges">
+    <div class="badge">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Helt gratis og uforpliktende
+    </div>
+    <div class="badge">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Få tilbud med en gang
+    </div>
+    <div class="badge">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+      Enkel søknad
+    </div>
+  </div>
+  <div class="trust-row">
+    <div class="trust-avatar">👨</div>
+    <div class="trust-text">
+      <strong>I år har over 200</strong>
+      nordmenn spart penger med Gigabytt
+    </div>
+  </div>
+  <div class="hero-form">
+    <div class="form-group">
+      <label>Ditt navn <span>*</span></label>
+      <input type="text" placeholder="Ditt navn" />
+    </div>
+    <div class="form-group">
+      <label>Ditt telefonnummer <span>*</span></label>
+      <input type="tel" placeholder="Ditt telefonnummer" />
+    </div>
+    <button class="btn-light" style="width:100%;justify-content:center;margin-top:6px;">
+      Få gratis tilbud
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+    </button>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section>
+  <div class="two-col">
+    <div class="col-text">
+      <h2>Hvordan funker det?</h2>
+      <p>Gigabytt.no finner et godt tilbud på mobilabonnement for deg, kun gjennom en enkel søknad. Vi gjør det kompliserte enkelt, slik at du slipper å lete selv.</p>
+      <ul class="checklist">
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 16 9"/></svg> Kun en søknad</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 16 9"/></svg> Fyll inn enkelt skjema</li>
+        <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 16 9"/></svg> Gratis og uforpliktende tjeneste</li>
+      </ul>
+      <a href="#" class="btn-blue">Sjekk dine tilbud</a>
+    </div>
+    <div class="col-img"><div class="img-placeholder">📱</div></div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section style="background:#e8f4fc;">
+  <div class="inner">
+    <h2 class="section-title">Mer data på 1-2-3</h2>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+        </div>
+        <h3>1. Fyll inn et enkelt skjema</h3>
+        <p>Svar kort på noen spørsmål.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        </div>
+        <h3>2. Vi sjekker</h3>
+        <p>Vi finner det beste mobilabonnementet for ditt behov.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-icon">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <h3>3. Motta tilbud</h3>
+        <p>Du mottar gratis og uforpliktende tilbud.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section>
+  <div class="two-col">
+    <div class="col-text">
+      <h2>Hvorfor Gigabytt.no?</h2>
+      <p>Det finnes ikke ett mobilabonnement som passer for alle. Enten du er en storforbruker av data, ser etter en god avtale til barna, eller trenger et enkelt abonnement, hjelper vi deg å navigere i jungelen av tilbud.</p>
+      <p>Gigabytt.no er en uavhengig tjeneste som setter forbrukeren først. Vi finner datapakker for deg, slik at du får mest mulig mobilglede for pengene.</p>
+    </div>
+    <div class="col-img"><div class="img-placeholder">🏍️</div></div>
+  </div>
+</section>
+
+<!-- SHARE EXPERIENCES -->
+<section style="background:#e8f4fc;">
+  <div class="two-col reverse">
+    <div class="col-text">
+      <h2>Del alle opplevelsene</h2>
+      <p>Vi vet at det kan være både frustrerende og uoversiktlig å velge blant mobilabonnement og leverandører. La oss gjøre det enklere for deg!</p>
+      <p>Vi tar jobben med å finne mobilabonnement som passer for ditt behov. Du taper ingenting på å sjekke om du kan få en bedre avtale enn den du har i dag.</p>
+      <a href="#" class="btn-blue" style="margin-top:8px;">Sjekk gratis nå</a>
+    </div>
+    <div class="col-img"><div class="img-placeholder">🎵</div></div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section>
+  <div class="inner">
+    <h2 class="testimonials-title">Tilbakemeldinger fra kunder</h2>
+    <div class="t-grid">
+      <div class="t-card">
+        <p>"Var litt tilfeldig at jeg sjekket tilbudet hos dere, men angrer ikke. Fornøyd med den nye datapakken!"</p>
+        <div class="author">Lisa Marie</div>
+      </div>
+      <div class="t-card">
+        <p>"Takk for hjelpen! Er fornøyd med datapakken nå 😊"</p>
+        <div class="author">Ahmad</div>
+      </div>
+    </div>
+    <div class="dots">
+      <div class="dot"></div><div class="dot"></div>
+      <div class="dot active"></div><div class="dot"></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section style="background:#e8f4fc;">
+  <div class="partners-card">
+    <h2>Norges ledende mobilselskaper</h2>
+    <p>En oversikt over de største aktørene innen mobilabonnement i det norske markedet. Send inn en enkel søknad om ønsker tilbud på mobilabonnement.</p>
+    <div class="partners-logos">
+      <div class="partner-logo">happybytes</div>
+      <div class="partner-logo hl">1neCall</div>
+      <div class="partner-logo hl" style="color:#e84a6f;">Chili mobil</div>
+      <div class="partner-logo hl" style="color:#0075c9;">telenor</div>
+      <div class="partner-logo">talkmore</div>
+    </div>
+    <a href="#" class="btn-blue">Send gratis søknad</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <a href="index.html" class="footer-logo">
+        <div class="logo-bars"><span></span><span></span><span></span><span></span></div>
+        Gigabytt.no
+      </a>
+      <div class="footer-ci">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Innspurten 1B, 0663 Oslo
+      </div>
+      <div class="footer-ci">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        hei@gigabytt.no
+      </div>
+      <div class="footer-ci">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.57 3.18 2 2 0 0 1 3.55 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +47 40 00 19 56
+      </div>
+      <div class="footer-hours">
+        <strong>Åpningstider telefon</strong>
+        Man-fre: 09:00–18:00
+      </div>
+      <div class="social-row">
+        <div class="social-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></div>
+        <div class="social-btn"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+      </div>
+    </div>
+    <div>
+      <div class="footer-heading">Navigasjon</div>
+      <ul class="footer-nav">
+        <li><a href="om-oss.html">Om oss</a></li>
+        <li><a href="kontakt.html">Kontakt oss</a></li>
+        <li><a href="#">Personvern- og brukervilkår</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>
+      <p>© 2026 Et samarbeid mellom Zen Finans AS og Semsk AS</p>
+      <p style="margin-top:3px;">Zen Finans AS | Org.nr. 921 670 605 | Innspurten 1B, 0663 Oslo</p>
+      <p style="margin-top:2px;">Semsk AS | Org.nr. 835 954 382 | Innspurten 1B, 0663 Oslo</p>
+    </div>
+    <p>Alle rettigheter reservert.</p>
+  </div>
+</footer>
+
+</body>
+</html>
