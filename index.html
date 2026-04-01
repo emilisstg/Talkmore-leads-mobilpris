@@ -140,21 +140,249 @@
     </div>
   </div>
 
-  <div class="hero-form">
-    <div class="form-group">
-      <label>Ditt navn <span>*</span></label>
-      <input type="text" placeholder="Ditt navn" />
+  <!-- MULTI-STEP FORM -->
+  <div class="hero-form" id="multiForm">
+
+    <!-- Progress bar -->
+    <div class="mf-progress">
+      <div class="mf-progress-bar" id="mfBar"></div>
     </div>
-    <div class="form-group">
-      <label>Ditt telefonnummer <span>*</span></label>
-      <input type="tel" placeholder="Ditt telefonnummer" />
+
+    <!-- STEP 1: Contact info -->
+    <div class="mf-step active" id="step1">
+      <div class="mf-step-label">Steg 1 av 4 — Kontaktinfo</div>
+      <div class="form-group">
+        <label>Fullt navn <span>*</span></label>
+        <input type="text" id="f_name" placeholder="Ditt for- og etternavn" />
+      </div>
+      <div class="form-group">
+        <label>E-postadresse <span>*</span></label>
+        <input type="email" id="f_email" placeholder="Din e-postadresse" />
+      </div>
+      <div class="form-group">
+        <label>Telefonnummer <span>*</span></label>
+        <input type="tel" id="f_phone" placeholder="+47 Ditt telefonnummer" />
+      </div>
+      <button class="btn-light mf-next" style="width:100%;justify-content:center;" onclick="nextStep(1)">
+        Neste
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
     </div>
-    <button class="btn-light" style="width:100%;justify-content:center;margin-top:6px;">
-      Få gratis tilbud
-      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
-    </button>
+
+    <!-- STEP 2: Betaler du for deg selv? -->
+    <div class="mf-step" id="step2">
+      <div class="mf-step-label">Steg 2 av 4</div>
+      <div class="mf-question">Betaler du mobilabonnement for deg selv eller andre i familien?</div>
+      <div class="mf-options">
+        <button class="mf-opt" onclick="selectOpt(this,'q1','Ja'); nextStep(2);">✓ &nbsp; Ja</button>
+        <button class="mf-opt" onclick="selectOpt(this,'q1','Nei'); nextStep(2);">✕ &nbsp; Nei</button>
+      </div>
+    </div>
+
+    <!-- STEP 3: Alder -->
+    <div class="mf-step" id="step3">
+      <div class="mf-step-label">Steg 3 av 4</div>
+      <div class="mf-question">Hvor gammel er du?</div>
+      <div class="mf-options grid2">
+        <button class="mf-opt" onclick="selectOpt(this,'q2','45+'); nextStep(3);">45+</button>
+        <button class="mf-opt" onclick="selectOpt(this,'q2','31-45'); nextStep(3);">31 – 45</button>
+        <button class="mf-opt" onclick="selectOpt(this,'q2','25-30'); nextStep(3);">25 – 30</button>
+        <button class="mf-opt" onclick="selectOpt(this,'q2','18-24'); nextStep(3);">18 – 24</button>
+        <button class="mf-opt" onclick="selectOpt(this,'q2','Under 18'); nextStep(3);">Under 18</button>
+      </div>
+    </div>
+
+    <!-- STEP 4: Nåværende operatør -->
+    <div class="mf-step" id="step4">
+      <div class="mf-step-label">Steg 4 av 4</div>
+      <div class="mf-question">Hva er din nåværende mobiloperatør?</div>
+      <div class="mf-options grid2">
+        <button class="mf-opt" onclick="selectOpt(this,'q3','Bedriftsabonnement'); nextStep(4);">Jeg har bedriftsabonnement</button>
+        <button class="mf-opt" onclick="selectOpt(this,'q3','Fjordkraft'); nextStep(4);">Fjordkraft</button>
+        <button class="mf-opt" onclick="selectOpt(this,'q3','ICE'); nextStep(4);">ICE</button>
+        <button class="mf-opt" onclick="selectOpt(this,'q3','MyCall'); nextStep(4);">MyCall</button>
+        <button class="mf-opt" onclick="selectOpt(this,'q3','OneCall'); nextStep(4);">OneCall</button>
+        <button class="mf-opt" onclick="selectOpt(this,'q3','Telia'); nextStep(4);">Telia</button>
+        <button class="mf-opt" onclick="selectOpt(this,'q3','Telenor'); nextStep(4);">Telenor</button>
+        <button class="mf-opt" onclick="selectOpt(this,'q3','Talkmore'); nextStep(4);">Talkmore</button>
+        <button class="mf-opt full" onclick="selectOpt(this,'q3','Annet'); nextStep(4);">Annet</button>
+      </div>
+
+      <!-- Consent checkbox -->
+      <label class="mf-checkbox">
+        <input type="checkbox" id="f_consent" />
+        <span>Ja, jeg er over 18 år og Mobilpris kan kontakte meg på telefon med et godt tilbud, selv om jeg har reservert meg mot dette i reservasjonsregisteret.</span>
+      </label>
+
+      <button class="btn-light mf-next" style="width:100%;justify-content:center;margin-top:18px;" onclick="submitForm()">
+        Send søknad
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+
+  </div><!-- end hero-form -->
+
+  <!-- THANK YOU SCREEN -->
+  <div class="hero-form" id="thankYou" style="display:none; text-align:center;">
+    <div style="font-size:3rem; margin-bottom:16px;">🎉</div>
+    <h2 style="color:#fff; font-size:1.6rem; font-weight:800; margin-bottom:12px;">Takk for søknaden!</h2>
+    <p style="color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:10px;">Vi er allerede i gang med å jakte de beste mobilavtalene for deg.</p>
+    <p style="color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:10px;">En av våre rådgivere vil ringe deg snart med et godt tilbud.</p>
+    <p style="color:rgba(255,255,255,0.6); font-size:0.88rem; margin-top:18px;">
+      🔒 Dine data behandles trygt og i samsvar med GDPR. Vi deler aldri informasjonen din med tredjeparter uten ditt samtykke.
+    </p>
   </div>
+
 </section>
+
+<style>
+  .mf-progress {
+    height: 4px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 99px;
+    margin-bottom: 22px;
+    overflow: hidden;
+  }
+  .mf-progress-bar {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 99px;
+    width: 25%;
+    transition: width 0.4s ease;
+  }
+  .mf-step { display: none; }
+  .mf-step.active { display: block; animation: fadeUp 0.35s ease; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .mf-step-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 12px;
+  }
+  .mf-question {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 16px;
+    line-height: 1.4;
+  }
+  .mf-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .mf-options.grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .mf-opt {
+    background: rgba(255,255,255,0.08);
+    border: 1.5px solid rgba(143,227,255,0.25);
+    border-radius: 10px;
+    padding: 13px 16px;
+    font-family: inherit;
+    font-size: 0.92rem;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s, border-color 0.2s, transform 0.1s;
+  }
+  .mf-opt:hover { background: rgba(143,227,255,0.15); border-color: var(--accent); transform: translateY(-1px); }
+  .mf-opt.selected { background: var(--accent); color: var(--hero-bg); border-color: var(--accent); }
+  .mf-opt.full { grid-column: 1 / -1; }
+  .mf-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 18px;
+    cursor: pointer;
+  }
+  .mf-checkbox input[type="checkbox"] {
+    width: 17px; height: 17px;
+    margin-top: 2px;
+    accent-color: var(--accent);
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .mf-checkbox span {
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+  }
+  .mf-error {
+    font-size: 0.82rem;
+    color: #ff8a8a;
+    margin-top: -10px;
+    margin-bottom: 10px;
+  }
+</style>
+
+<script>
+var answers = {};
+
+function nextStep(current) {
+  // Validate step 1
+  if (current === 1) {
+    var name  = document.getElementById('f_name').value.trim();
+    var email = document.getElementById('f_email').value.trim();
+    var phone = document.getElementById('f_phone').value.trim();
+    var existing = document.querySelector('.mf-error');
+    if (existing) existing.remove();
+    if (!name || !email || !phone) {
+      var err = document.createElement('p');
+      err.className = 'mf-error';
+      err.textContent = 'Vennligst fyll ut alle felt.';
+      document.getElementById('step1').insertBefore(err, document.querySelector('.mf-next'));
+      return;
+    }
+  }
+  // Validate consent on last step
+  if (current === 4) { submitForm(); return; }
+
+  var from = document.getElementById('step' + current);
+  var to   = document.getElementById('step' + (current + 1));
+  from.classList.remove('active');
+  to.classList.add('active');
+
+  // Update progress bar
+  var pct = ((current) / 4) * 100;
+  document.getElementById('mfBar').style.width = pct + '%';
+}
+
+function selectOpt(el, key, val) {
+  answers[key] = val;
+  var siblings = el.closest('.mf-options').querySelectorAll('.mf-opt');
+  siblings.forEach(function(s){ s.classList.remove('selected'); });
+  el.classList.add('selected');
+}
+
+function submitForm() {
+  if (!document.getElementById('f_consent').checked) {
+    var existing = document.getElementById('consentErr');
+    if (!existing) {
+      var err = document.createElement('p');
+      err.className = 'mf-error';
+      err.id = 'consentErr';
+      err.textContent = 'Du må godta at vi kan kontakte deg for å gå videre.';
+      document.getElementById('step4').insertBefore(err, document.querySelector('#step4 .mf-next'));
+    }
+    return;
+  }
+  // Show thank you
+  document.getElementById('multiForm').style.display = 'none';
+  document.getElementById('thankYou').style.display = 'block';
+  // Scroll to top of hero
+  document.querySelector('.hero').scrollIntoView({behavior:'smooth'});
+}
+</script>
 
 <!-- HOW IT WORKS -->
 <section>
@@ -398,7 +626,7 @@
       </div>
       <div class="footer-ci">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        info@mobilpris.no
+        <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="d3babdb5bc93bebcb1babfa3a1baa0fdbdbc">[email&#160;protected]</a>
       </div>
       <div class="footer-ci">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.57 3.18 2 2 0 0 1 3.55 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -419,17 +647,8 @@
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function(){
   var nav = document.querySelector('nav');
   var last = window.scrollY;
-  window.addEventListener('scroll', function(){
-    var cur = window.scrollY;
-    if(cur > last && cur > 60){ nav.classList.add('hidden'); }
-    else { nav.classList.remove('hidden'); }
-    last = cur;
-  }, {passive:true});
-})();
-</script>
-</body>
-</html>
+  window.addEventListener('
