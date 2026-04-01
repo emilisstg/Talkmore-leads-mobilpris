@@ -209,67 +209,156 @@
   </div>
 </section>
 
-<!-- WHY US -->
-<section>
-  <div class="two-col">
-    <div class="col-text">
-      <h2>Hvorfor Gigabytt.no?</h2>
-      <p>Det finnes ikke ett mobilabonnement som passer for alle. Enten du er en storforbruker av data, ser etter en god avtale til barna, eller trenger et enkelt abonnement, hjelper vi deg å navigere i jungelen av tilbud.</p>
-      <p>Gigabytt.no er en uavhengig tjeneste som setter forbrukeren først. Vi finner datapakker for deg, slik at du får mest mulig mobilglede for pengene.</p>
-    </div>
-    <div class="col-img"><div class="img-placeholder">🏍️</div></div>
-  </div>
-</section>
 
-<!-- SHARE EXPERIENCES -->
-<section style="background:#e8f4fc;">
-  <div class="two-col reverse">
-    <div class="col-text">
-      <h2>Del alle opplevelsene</h2>
-      <p>Vi vet at det kan være både frustrerende og uoversiktlig å velge blant mobilabonnement og leverandører. La oss gjøre det enklere for deg!</p>
-      <p>Vi tar jobben med å finne mobilabonnement som passer for ditt behov. Du taper ingenting på å sjekke om du kan få en bedre avtale enn den du har i dag.</p>
-      <a href="#" class="btn-blue" style="margin-top:8px;">Sjekk gratis nå</a>
-    </div>
-    <div class="col-img"><div class="img-placeholder">🎵</div></div>
-  </div>
-</section>
-
-<!-- TESTIMONIALS -->
-<section>
+<!-- TESTIMONIALS CAROUSEL -->
+<section style="overflow:hidden; padding-bottom: 60px;">
   <div class="inner">
     <h2 class="testimonials-title">Tilbakemeldinger fra kunder</h2>
-    <div class="t-grid">
-      <div class="t-card">
-        <p>"Var litt tilfeldig at jeg sjekket tilbudet hos dere, men angrer ikke. Fornøyd med den nye datapakken!"</p>
-        <div class="author">Lisa Marie</div>
-      </div>
-      <div class="t-card">
-        <p>"Takk for hjelpen! Er fornøyd med datapakken nå 😊"</p>
-        <div class="author">Ahmad</div>
-      </div>
-    </div>
-    <div class="dots">
-      <div class="dot"></div><div class="dot"></div>
-      <div class="dot active"></div><div class="dot"></div>
-    </div>
   </div>
+
+  <div class="carousel-wrap">
+    <div class="carousel-track" id="carouselTrack">
+      <div class="c-card">
+        <p>"Var litt tilfeldig at jeg sjekket tilbudet hos dere, men angrer ikke. Fornøyd med den nye datapakken!"</p>
+        <div class="c-author">Lisa Marie</div>
+      </div>
+      <div class="c-card">
+        <p>"Takk for hjelpen! Er fornøyd med datapakken nå 😊"</p>
+        <div class="c-author">Ahmad</div>
+      </div>
+      <div class="c-card">
+        <p>"Veldig enkelt og raskt. Fikk et godt tilbud samme dag jeg sendte inn skjemaet!"</p>
+        <div class="c-author">Marte K.</div>
+      </div>
+      <div class="c-card">
+        <p>"Sparte over 200 kr i måneden på nytt abonnement. Anbefaler alle å sjekke dette!"</p>
+        <div class="c-author">Thomas B.</div>
+      </div>
+      <div class="c-card">
+        <p>"Syntes det var litt rart at det var gratis, men det var det faktisk. Superfornøyd!"</p>
+        <div class="c-author">Ingrid L.</div>
+      </div>
+      <div class="c-card">
+        <p>"Tok bare noen minutter å fylle ut skjemaet, og dagen etter hadde jeg tre tilbud å velge mellom."</p>
+        <div class="c-author">Jonas R.</div>
+      </div>
+    </div>
+    <div class="fade-left"></div>
+    <div class="fade-right"></div>
+  </div>
+
+  <div class="carousel-dots" id="carouselDots"></div>
 </section>
 
-<!-- PARTNERS -->
-<section style="background:#e8f4fc;">
-  <div class="partners-card">
-    <h2>Norges ledende mobilselskaper</h2>
-    <p>En oversikt over de største aktørene innen mobilabonnement i det norske markedet. Send inn en enkel søknad om ønsker tilbud på mobilabonnement.</p>
-    <div class="partners-logos">
-      <div class="partner-logo">happybytes</div>
-      <div class="partner-logo hl">1neCall</div>
-      <div class="partner-logo hl" style="color:#e84a6f;">Chili mobil</div>
-      <div class="partner-logo hl" style="color:#0075c9;">telenor</div>
-      <div class="partner-logo">talkmore</div>
-    </div>
-    <a href="#" class="btn-blue">Send gratis søknad</a>
-  </div>
-</section>
+<style>
+  .carousel-wrap {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    padding: 8px 0 16px;
+  }
+  .carousel-track {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+    will-change: transform;
+    padding: 8px 0 12px;
+  }
+  .c-card {
+    background: var(--blue-dark);
+    border-radius: 14px;
+    padding: 28px 30px;
+    min-width: 340px;
+    max-width: 340px;
+    flex-shrink: 0;
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .c-card p {
+    color: rgba(255,255,255,0.92);
+    font-size: 0.93rem;
+    line-height: 1.65;
+    font-style: italic;
+    margin-bottom: 14px;
+  }
+  .c-author { color: var(--accent); font-weight: 600; font-size: 0.88rem; }
+  .c-card.faded { opacity: 0.22; transform: scale(0.95); }
+  .fade-left, .fade-right {
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 200px;
+    pointer-events: none;
+    z-index: 2;
+  }
+  .fade-left  { left: 0;  background: linear-gradient(to right, var(--bg) 10%, transparent); }
+  .fade-right { right: 0; background: linear-gradient(to left,  var(--bg) 10%, transparent); }
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 24px;
+  }
+  .carousel-dots .cdot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba(13,111,168,0.2);
+    cursor: pointer;
+    border: none;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .carousel-dots .cdot.active {
+    background: var(--blue-dark);
+    transform: scale(1.35);
+  }
+</style>
+
+<script>
+(function() {
+  const track = document.getElementById('carouselTrack');
+  const dotsEl = document.getElementById('carouselDots');
+  const cards = Array.from(track.children);
+  const total = cards.length;
+  let current = 0;
+
+  cards.forEach((_, i) => {
+    const d = document.createElement('button');
+    d.className = 'cdot' + (i === 0 ? ' active' : '');
+    d.addEventListener('click', () => goTo(i));
+    dotsEl.appendChild(d);
+  });
+
+  function goTo(idx) {
+    current = ((idx % total) + total) % total;
+    render();
+  }
+
+  function render() {
+    const cardW = cards[0].offsetWidth + 20;
+    const viewW = track.parentElement.offsetWidth;
+    const offset = (viewW / 2) - (cardW / 2) - current * cardW;
+    track.style.transform = 'translateX(' + offset + 'px)';
+    cards.forEach((c, i) => {
+      const dist = Math.abs(i - current);
+      c.classList.toggle('faded', dist > 1);
+    });
+    Array.from(dotsEl.children).forEach((d, i) => d.classList.toggle('active', i === current));
+  }
+
+  let timer = setInterval(() => goTo(current + 1), 3500);
+  const wrap = track.parentElement;
+  wrap.addEventListener('mouseenter', () => clearInterval(timer));
+  wrap.addEventListener('mouseleave', () => { clearInterval(timer); timer = setInterval(() => goTo(current + 1), 3500); });
+
+  let sx = 0;
+  track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, {passive:true});
+  track.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - sx;
+    if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+  });
+
+  window.addEventListener('resize', render);
+  render();
+})();
+</script>
 
 <!-- FOOTER -->
 <footer>
@@ -285,7 +374,7 @@
       </div>
       <div class="footer-ci">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        hei@gigabytt.no
+        <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="264e434f66414f4147445f5252084849">[email&#160;protected]</a>
       </div>
       <div class="footer-ci">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.57 3.18 2 2 0 0 1 3.55 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -313,11 +402,4 @@
     <div>
       <p>© 2026 Et samarbeid mellom Zen Finans AS og Semsk AS</p>
       <p style="margin-top:3px;">Zen Finans AS | Org.nr. 921 670 605 | Innspurten 1B, 0663 Oslo</p>
-      <p style="margin-top:2px;">Semsk AS | Org.nr. 835 954 382 | Innspurten 1B, 0663 Oslo</p>
-    </div>
-    <p>Alle rettigheter reservert.</p>
-  </div>
-</footer>
-
-</body>
-</html>
+      <p style="margin-top:2px;">Semsk AS | Org.nr. 835 954 382
