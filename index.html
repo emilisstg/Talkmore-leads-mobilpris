@@ -40,7 +40,7 @@ nav {
   position: fixed;
   top: 0; left: 0; right: 0;
   z-index: 100;
-  border-bottom: 1px solid rgba(255,255,255,0.07);
+  border-bottom: none;
   transform: translateY(0);
   transition: transform 0.32s ease;
 }
@@ -356,10 +356,13 @@ footer { background: var(--hero-bg); padding: 56px 64px 28px; }
   .hero-form { padding: 24px 20px; }
   .two-col { grid-template-columns: 1fr; gap: 36px; }
   .two-col.reverse .col-img { order: 0; }
+  .col-text { text-align: center; }
+  .col-text .checklist { text-align: left; display: inline-block; }
+  .col-text .btn-blue { display: inline-flex; }
   .steps-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .footer-top { grid-template-columns: 1fr; }
   .mf-options.grid2 { grid-template-columns: 1fr 1fr; }
+  .c-card { min-width: calc(85vw - 44px); max-width: calc(85vw - 44px); }
 }
 </style>
 </head>
@@ -586,18 +589,22 @@ var answers = {};
 
 function setFieldError(id, msg) {
   var input = document.getElementById(id);
-  var group = input.closest('.form-group');
-  group.classList.add('has-error');
-  var ex = group.querySelector('.mf-error');
+  input.style.boxShadow = '0 0 0 2.5px #ff6b6b';
+  input.style.outline = 'none';
+  var ex = document.getElementById('err_'+id);
   if (ex) ex.remove();
-  if (msg) { var e = document.createElement('span'); e.className='mf-error'; e.textContent=msg; group.appendChild(e); }
+  var e = document.createElement('div');
+  e.id = 'err_'+id;
+  e.style.cssText = 'color:#ff8a8a;font-size:0.82rem;margin-top:5px;margin-bottom:2px;';
+  e.textContent = msg;
+  input.insertAdjacentElement('afterend', e);
 }
 function clearFieldError(id) {
   var input = document.getElementById(id);
   if (!input) return;
-  var group = input.closest('.form-group');
-  group.classList.remove('has-error');
-  var ex = group.querySelector('.mf-error'); if (ex) ex.remove();
+  input.style.boxShadow = '';
+  var ex = document.getElementById('err_'+id);
+  if (ex) ex.remove();
 }
 function isValidEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e); }
 function isValidPhone(p) { var d = p.replace(/[\s\-\+]/g,'').replace(/^(0047|47)/,''); return /^\d{8}$/.test(d); }
@@ -610,10 +617,10 @@ function nextStep(current) {
     var valid=true;
     if (!name) { setFieldError('f_name','Vennligst skriv inn ditt fulle navn.'); valid=false; } else clearFieldError('f_name');
     if (!email) { setFieldError('f_email','Vennligst skriv inn e-postadressen din.'); valid=false; }
-    else if (!isValidEmail(email)) { setFieldError('f_email','Ugyldig e-postadresse. Eksempel: navn@epost.no'); valid=false; }
+    else if (!isValidEmail(email)) { setFieldError('f_email','Ugyldig e-post. Eksempel: navn@epost.no'); valid=false; }
     else clearFieldError('f_email');
     if (!phone) { setFieldError('f_phone','Vennligst skriv inn telefonnummeret ditt.'); valid=false; }
-    else if (!isValidPhone(phone)) { setFieldError('f_phone','Telefonnummeret må ha 8 sifre (norsk nummer).'); valid=false; }
+    else if (!isValidPhone(phone)) { setFieldError('f_phone','Må ha 8 sifre. Eksempel: 91234567'); valid=false; }
     else clearFieldError('f_phone');
     if (!valid) return;
   }
@@ -630,7 +637,8 @@ function selectOpt(el, key, val) {
 function submitForm() {
   var ex=document.getElementById('consentErr'); if(ex) ex.remove();
   if (!document.getElementById('f_consent').checked) {
-    var e=document.createElement('p'); e.className='mf-error'; e.id='consentErr'; e.style.marginTop='8px';
+    var e=document.createElement('div'); e.id='consentErr';
+    e.style.cssText='color:#ff8a8a;font-size:0.82rem;margin-top:8px;';
     e.textContent='Du må godta at vi kan kontakte deg for å gå videre.';
     document.querySelector('.mf-checkbox').insertAdjacentElement('afterend',e); return;
   }
