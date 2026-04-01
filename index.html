@@ -2,124 +2,375 @@
 <html lang="no">
 <head>
 <meta charset="UTF-8" />
-<meta name="cf-2fa-verify" content="off">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mobilpris – Mobilabonnement</title>
-<link rel="stylesheet" href="styles.css" />
+<title>Mobilpris – Finn beste mobilabonnement</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
 <style>
-  /* HERO */
-  .hero {
-    background: var(--hero-bg);
-    padding: 80px 64px 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% -10%, rgba(143,227,255,0.15) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .hero h1 {
-    font-size: clamp(2.4rem, 5vw, 3.8rem);
-    font-weight: 800;
-    color: var(--white);
-    line-height: 1.15;
-    max-width: 680px;
-    margin-bottom: 18px;
-  }
-  .hero h1 span { color: var(--accent); }
-  .hero > p {
-    color: rgba(255,255,255,0.7);
-    font-size: 1.05rem;
-    max-width: 500px;
-    line-height: 1.65;
-    margin-bottom: 28px;
-  }
-  .hero-badges {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    justify-content: center;
-    margin-bottom: 26px;
-  }
-  .badge {
-    display: flex;
-    align-items: center;
-    gap: 7px;
-    border: 1.5px solid rgba(143,227,255,0.35);
-    border-radius: 999px;
-    padding: 7px 16px;
-    font-size: 0.86rem;
-    color: rgba(255,255,255,0.85);
-    font-weight: 500;
-  }
-  .badge svg { color: var(--accent); }
-  .trust-row {
-    display: flex;
-    align-items: center;
-    gap: 13px;
-    margin-bottom: 32px;
-    color: rgba(255,255,255,0.75);
-    font-size: 0.88rem;
-  }
-  .trust-avatar {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #c8f0ff, #8fe3ff);
-    border: 2px solid rgba(255,255,255,0.25);
-    display: flex; align-items: center; justify-content: center;
-    font-size: 1.1rem; flex-shrink: 0;
-  }
-  .trust-text strong { color: var(--white); display: block; font-size: 0.92rem; }
-  .hero-form {
-    background: rgba(255,255,255,0.06);
-    border: 1.5px solid rgba(143,227,255,0.2);
-    border-radius: 16px;
-    padding: 30px 34px;
-    width: 100%; max-width: 500px;
-    margin-bottom: 48px;
-  }
-  .form-group { margin-bottom: 16px; text-align: left; }
-  .form-group label {
-    display: block;
-    font-size: 0.83rem; font-weight: 600;
-    color: rgba(255,255,255,0.75);
-    margin-bottom: 6px;
-  }
-  .form-group label span { color: var(--accent); }
-  .form-group input {
-    width: 100%;
-    padding: 13px 15px;
-    border-radius: 10px; border: none;
-    font-family: inherit; font-size: 0.95rem;
-    background: var(--white); color: #000;
-    outline: none; transition: box-shadow 0.2s;
-  }
-  .form-group input:focus { box-shadow: 0 0 0 3px rgba(143,227,255,0.4); }
+:root {
+  --bg: #f0f8ff;
+  --hero-bg: #0d2d4a;
+  --accent: #8fe3ff;
+  --accent-dark: #5ecfee;
+  --blue-dark: #0d6fa8;
+  --blue-darker: #085280;
+  --text: #000000;
+  --text-muted: #333333;
+  --white: #ffffff;
+  --border: rgba(13,111,168,0.15);
+}
 
-  @media (max-width: 860px) {
-    .hero { padding: 60px 22px 0; }
-    .hero-form { padding: 24px 22px; }
-  }
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  overflow-x: hidden;
+  padding-top: 62px;
+}
+
+/* ── NAV ── */
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 64px;
+  background: var(--hero-bg);
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  border-bottom: 1px solid rgba(255,255,255,0.07);
+  transform: translateY(0);
+  transition: transform 0.32s ease;
+}
+nav.hidden { transform: translateY(-100%); }
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+.logo-bars { display: flex; align-items: flex-end; gap: 3px; height: 24px; }
+.logo-bars span { display: block; width: 5px; background: var(--accent); border-radius: 2px; }
+.logo-bars span:nth-child(1) { height: 9px; }
+.logo-bars span:nth-child(2) { height: 14px; }
+.logo-bars span:nth-child(3) { height: 19px; }
+.logo-bars span:nth-child(4) { height: 24px; }
+.logo-name { font-size: 1.25rem; font-weight: 700; color: var(--white); }
+
+/* ── HERO ── */
+.hero {
+  background: var(--hero-bg);
+  padding: 80px 64px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 50% -10%, rgba(143,227,255,0.15) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-weight: 800;
+  color: var(--white);
+  line-height: 1.15;
+  max-width: 680px;
+  margin-bottom: 18px;
+}
+.hero h1 span { color: var(--accent); }
+.hero > p {
+  color: rgba(255,255,255,0.7);
+  font-size: 1.05rem;
+  max-width: 500px;
+  line-height: 1.65;
+  margin-bottom: 28px;
+}
+.hero-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 32px;
+}
+.badge {
+  display: flex; align-items: center; gap: 7px;
+  border: 1.5px solid rgba(143,227,255,0.35);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-size: 0.86rem;
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+}
+.badge svg { color: var(--accent); }
+
+/* ── FORM ── */
+.hero-form {
+  background: rgba(255,255,255,0.06);
+  border: 1.5px solid rgba(143,227,255,0.2);
+  border-radius: 16px;
+  padding: 30px 34px;
+  width: 100%; max-width: 500px;
+  position: relative; z-index: 1;
+}
+.mf-progress {
+  height: 4px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 99px;
+  margin-bottom: 22px;
+  overflow: hidden;
+}
+.mf-progress-bar {
+  height: 100%; background: var(--accent);
+  border-radius: 99px; width: 25%;
+  transition: width 0.4s ease;
+}
+.mf-step { display: none; }
+.mf-step.active { display: block; animation: fadeUp 0.35s ease; }
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.mf-step-label {
+  font-size: 0.75rem; font-weight: 700;
+  color: var(--accent); text-transform: uppercase;
+  letter-spacing: 0.06em; margin-bottom: 12px;
+}
+.mf-question {
+  font-size: 1rem; font-weight: 700;
+  color: #fff; margin-bottom: 16px; line-height: 1.4;
+}
+.form-group { margin-bottom: 16px; text-align: left; }
+.form-group label {
+  display: block; font-size: 0.83rem; font-weight: 600;
+  color: rgba(255,255,255,0.75); margin-bottom: 6px;
+}
+.form-group label span { color: var(--accent); }
+.form-group input {
+  width: 100%; padding: 13px 15px;
+  border-radius: 10px; border: none;
+  font-family: inherit; font-size: 0.95rem;
+  background: var(--white); color: #000;
+  outline: none; transition: box-shadow 0.2s;
+}
+.form-group input:focus { box-shadow: 0 0 0 3px rgba(143,227,255,0.4); }
+.form-group.has-error input { box-shadow: 0 0 0 2px rgba(255,100,100,0.5); }
+.mf-error {
+  font-size: 0.82rem; color: #ff8a8a;
+  margin-top: 4px; margin-bottom: 4px; display: block;
+}
+.mf-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.mf-options.grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.mf-opt {
+  background: rgba(255,255,255,0.08);
+  border: 1.5px solid rgba(143,227,255,0.25);
+  border-radius: 10px; padding: 13px 16px;
+  font-family: inherit; font-size: 0.92rem; font-weight: 600;
+  color: #fff; cursor: pointer; text-align: left;
+  transition: background 0.2s, border-color 0.2s, transform 0.1s;
+}
+.mf-opt:hover { background: rgba(143,227,255,0.15); border-color: var(--accent); transform: translateY(-1px); }
+.mf-opt.selected { background: var(--accent); color: var(--hero-bg); border-color: var(--accent); }
+.mf-opt.full { grid-column: 1 / -1; }
+.mf-checkbox {
+  display: flex; align-items: flex-start;
+  gap: 10px; margin-top: 18px; cursor: pointer;
+}
+.mf-checkbox input[type="checkbox"] {
+  width: 17px; height: 17px; margin-top: 2px;
+  accent-color: var(--accent); flex-shrink: 0; cursor: pointer;
+}
+.mf-checkbox span { font-size: 0.82rem; color: rgba(255,255,255,0.7); line-height: 1.5; }
+
+/* ── BUTTONS ── */
+.btn-light {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--accent); color: var(--hero-bg);
+  border: none; border-radius: 999px;
+  padding: 13px 30px;
+  font-family: inherit; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; transition: background 0.2s, transform 0.15s;
+  text-decoration: none;
+}
+.btn-light:hover { background: var(--accent-dark); transform: translateY(-1px); }
+.btn-blue {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--blue-dark); color: var(--white);
+  border: none; border-radius: 999px;
+  padding: 13px 30px;
+  font-family: inherit; font-size: 0.95rem; font-weight: 600;
+  cursor: pointer; transition: background 0.2s, transform 0.15s;
+  text-decoration: none;
+}
+.btn-blue:hover { background: var(--blue-darker); transform: translateY(-1px); }
+
+/* ── SECTIONS ── */
+section { padding: 80px 64px; }
+.inner { max-width: 1100px; margin: 0 auto; }
+.section-title {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700; color: var(--text);
+  text-align: center; margin-bottom: 48px;
+}
+
+/* ── TWO COL ── */
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px; align-items: center;
+  max-width: 1100px; margin: 0 auto;
+}
+.two-col.reverse .col-img { order: -1; }
+.col-text h2 {
+  font-size: clamp(1.7rem, 3vw, 2.3rem);
+  font-weight: 700; color: var(--text);
+  margin-bottom: 16px; line-height: 1.25;
+}
+.col-text p { color: var(--text-muted); line-height: 1.7; margin-bottom: 14px; font-size: 0.97rem; }
+.col-img { border-radius: 18px; overflow: hidden; box-shadow: 0 16px 48px rgba(13,45,74,0.12); }
+.img-placeholder {
+  width: 100%; aspect-ratio: 4/3;
+  background: linear-gradient(135deg, #d0e8f5, #b8d8ee);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3.5rem;
+}
+.checklist { list-style: none; margin: 16px 0 24px; }
+.checklist li {
+  display: flex; align-items: center; gap: 10px;
+  padding: 5px 0; font-weight: 500; font-size: 0.95rem; color: var(--text);
+}
+.checklist li svg { color: var(--blue-dark); flex-shrink: 0; }
+
+/* ── STEPS ── */
+.steps-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 28px; max-width: 860px; margin: 0 auto; }
+.step-card { text-align: center; }
+.step-icon {
+  width: 68px; height: 68px; background: var(--blue-dark);
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  margin: 0 auto 16px;
+}
+.step-icon svg { color: var(--accent); }
+.step-card h3 { font-size: 0.95rem; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.step-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
+
+/* ── TESTIMONIALS CAROUSEL ── */
+.carousel-wrap { position: relative; width: 100%; overflow: hidden; padding: 8px 0 16px; }
+.carousel-track {
+  display: flex; gap: 20px;
+  transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+  padding: 8px 0 12px;
+}
+.c-card {
+  background: var(--blue-dark); border-radius: 14px;
+  padding: 28px 30px; min-width: 340px; max-width: 340px;
+  flex-shrink: 0; transition: opacity 0.5s, transform 0.5s;
+}
+.c-card p { color: rgba(255,255,255,0.92); font-size: 0.93rem; line-height: 1.65; font-style: italic; margin-bottom: 14px; }
+.c-author { color: var(--accent); font-weight: 600; font-size: 0.88rem; }
+.c-card.faded { opacity: 0.22; transform: scale(0.95); }
+.fade-left, .fade-right {
+  position: absolute; top: 0; bottom: 0; width: 200px;
+  pointer-events: none; z-index: 2;
+}
+.fade-left  { left: 0;  background: linear-gradient(to right, var(--bg) 10%, transparent); }
+.fade-right { right: 0; background: linear-gradient(to left,  var(--bg) 10%, transparent); }
+.carousel-dots { display: flex; justify-content: center; gap: 8px; margin-top: 24px; }
+.carousel-dots .cdot {
+  width: 8px; height: 8px; border-radius: 50%;
+  background: rgba(13,111,168,0.2); cursor: pointer; border: none;
+  transition: background 0.2s, transform 0.2s;
+}
+.carousel-dots .cdot.active { background: var(--blue-dark); transform: scale(1.35); }
+
+/* ── OM OSS ── */
+.om-oss-section { background: var(--bg); }
+
+/* ── CONTACT ── */
+.contact-section { background: #e8f4fc; }
+.contact-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 64px; align-items: start;
+  max-width: 1000px; margin: 0 auto;
+}
+.contact-info h2, .contact-form-wrap h3 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 700; color: var(--text); margin-bottom: 14px;
+}
+.contact-info > p { color: var(--text-muted); line-height: 1.7; margin-bottom: 24px; font-size: 0.95rem; }
+.contact-detail {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 14px; font-size: 0.95rem;
+  color: var(--text); font-weight: 500;
+}
+.contact-detail svg { color: var(--blue-dark); flex-shrink: 0; }
+.c-input {
+  width: 100%; padding: 15px 17px;
+  border-radius: 11px; border: 1.5px solid var(--border);
+  background: var(--white);
+  font-family: inherit; font-size: 0.95rem; color: var(--text);
+  outline: none; margin-bottom: 13px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.c-input:focus { border-color: var(--blue-dark); box-shadow: 0 0 0 3px rgba(13,111,168,0.12); }
+textarea.c-input { resize: vertical; min-height: 115px; }
+
+/* ── FOOTER ── */
+footer { background: var(--hero-bg); padding: 56px 64px 28px; }
+.footer-top {
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 60px; max-width: 1100px; margin: 0 auto 36px;
+}
+.footer-logo {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 22px; color: var(--white);
+  text-decoration: none; font-size: 1.2rem; font-weight: 700;
+}
+.footer-ci {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 10px; font-size: 0.88rem; color: rgba(255,255,255,0.7);
+}
+.footer-ci svg { color: var(--accent); flex-shrink: 0; }
+.footer-heading { font-weight: 700; font-size: 0.95rem; color: var(--white); margin-bottom: 12px; }
+.footer-nav { list-style: none; }
+.footer-nav li { margin-bottom: 8px; }
+.footer-nav a { text-decoration: none; color: rgba(255,255,255,0.65); font-size: 0.88rem; transition: color 0.2s; }
+.footer-nav a:hover { color: var(--accent); }
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.1);
+  padding-top: 22px; max-width: 1100px; margin: 0 auto;
+}
+.footer-bottom p { font-size: 0.78rem; color: rgba(255,255,255,0.4); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) {
+  nav { padding: 14px 22px; }
+  section { padding: 56px 22px; }
+  .hero { padding: 60px 22px 48px; }
+  footer { padding: 44px 22px 22px; }
+  .hero-form { padding: 24px 20px; }
+  .two-col { grid-template-columns: 1fr; gap: 36px; }
+  .two-col.reverse .col-img { order: 0; }
+  .steps-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+  .footer-top { grid-template-columns: 1fr; }
+  .mf-options.grid2 { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
-  <a href="/" class="logo">
+  <a href="#" class="logo">
     <div class="logo-bars"><span></span><span></span><span></span><span></span></div>
     <span class="logo-name">Mobilpris</span>
   </a>
-  <div class="nav-links">
-    <a href="/om-oss">Om oss</a>
-    <a href="/kontakt">Kontakt oss</a>
-  </div>
 </nav>
 
 <!-- HERO -->
@@ -143,13 +394,9 @@
 
   <!-- MULTI-STEP FORM -->
   <div class="hero-form" id="multiForm">
+    <div class="mf-progress"><div class="mf-progress-bar" id="mfBar"></div></div>
 
-    <!-- Progress bar -->
-    <div class="mf-progress">
-      <div class="mf-progress-bar" id="mfBar"></div>
-    </div>
-
-    <!-- STEP 1: Contact info -->
+    <!-- Step 1 -->
     <div class="mf-step active" id="step1">
       <div class="mf-step-label">Steg 1 av 4 — Kontaktinfo</div>
       <div class="form-group">
@@ -164,13 +411,13 @@
         <label>Telefonnummer <span>*</span></label>
         <input type="tel" id="f_phone" placeholder="+47 Ditt telefonnummer" oninput="clearFieldError('f_phone')" />
       </div>
-      <button class="btn-light mf-next" style="width:100%;justify-content:center;" onclick="nextStep(1)">
+      <button class="btn-light" style="width:100%;justify-content:center;" onclick="nextStep(1)">
         Neste
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </button>
     </div>
 
-    <!-- STEP 2: Betaler du for deg selv? -->
+    <!-- Step 2 -->
     <div class="mf-step" id="step2">
       <div class="mf-step-label">Steg 2 av 4</div>
       <div class="mf-question">Betaler du mobilabonnement for deg selv eller andre i familien?</div>
@@ -180,7 +427,7 @@
       </div>
     </div>
 
-    <!-- STEP 3: Alder -->
+    <!-- Step 3 -->
     <div class="mf-step" id="step3">
       <div class="mf-step-label">Steg 3 av 4</div>
       <div class="mf-question">Hvor gammel er du?</div>
@@ -189,11 +436,11 @@
         <button class="mf-opt" onclick="selectOpt(this,'q2','31-45'); nextStep(3);">31 – 45</button>
         <button class="mf-opt" onclick="selectOpt(this,'q2','25-30'); nextStep(3);">25 – 30</button>
         <button class="mf-opt" onclick="selectOpt(this,'q2','18-24'); nextStep(3);">18 – 24</button>
-        <button class="mf-opt" onclick="selectOpt(this,'q2','Under 18'); nextStep(3);">Under 18</button>
+        <button class="mf-opt full" onclick="selectOpt(this,'q2','Under 18'); nextStep(3);">Under 18</button>
       </div>
     </div>
 
-    <!-- STEP 4: Nåværende operatør -->
+    <!-- Step 4 -->
     <div class="mf-step" id="step4">
       <div class="mf-step-label">Steg 4 av 4</div>
       <div class="mf-question">Hva er din nåværende mobiloperatør?</div>
@@ -208,243 +455,26 @@
         <button class="mf-opt" onclick="selectOpt(this,'q3','Talkmore'); nextStep(4);">Talkmore</button>
         <button class="mf-opt full" onclick="selectOpt(this,'q3','Annet'); nextStep(4);">Annet</button>
       </div>
-
-      <!-- Consent checkbox -->
       <label class="mf-checkbox">
         <input type="checkbox" id="f_consent" />
         <span>Ja, jeg er over 18 år og Mobilpris kan kontakte meg på telefon med et godt tilbud, selv om jeg har reservert meg mot dette i reservasjonsregisteret.</span>
       </label>
-
-      <button class="btn-light mf-next" style="width:100%;justify-content:center;margin-top:18px;" onclick="submitForm()">
+      <button class="btn-light" style="width:100%;justify-content:center;margin-top:18px;" onclick="submitForm()">
         Send søknad
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
       </button>
     </div>
+  </div>
 
-  </div><!-- end hero-form -->
-
-  <!-- THANK YOU SCREEN -->
+  <!-- THANK YOU -->
   <div class="hero-form" id="thankYou" style="display:none; text-align:center;">
     <div style="font-size:3rem; margin-bottom:16px;">🎉</div>
     <h2 style="color:#fff; font-size:1.6rem; font-weight:800; margin-bottom:12px;">Takk for søknaden!</h2>
     <p style="color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:10px;">Vi er allerede i gang med å jakte de beste mobilavtalene for deg.</p>
     <p style="color:rgba(255,255,255,0.8); line-height:1.7; margin-bottom:10px;">En av våre rådgivere vil ringe deg snart med et godt tilbud.</p>
-    <p style="color:rgba(255,255,255,0.6); font-size:0.88rem; margin-top:18px;">
-      🔒 Dine data behandles trygt og i samsvar med GDPR.
-    </p>
+    <p style="color:rgba(255,255,255,0.5); font-size:0.85rem; margin-top:18px;">🔒 Dine data behandles trygt og i samsvar med GDPR.</p>
   </div>
-
 </section>
-
-<style>
-  .mf-progress {
-    height: 4px;
-    background: rgba(255,255,255,0.12);
-    border-radius: 99px;
-    margin-bottom: 22px;
-    overflow: hidden;
-  }
-  .mf-progress-bar {
-    height: 100%;
-    background: var(--accent);
-    border-radius: 99px;
-    width: 25%;
-    transition: width 0.4s ease;
-  }
-  .mf-step { display: none; }
-  .mf-step.active { display: block; animation: fadeUp 0.35s ease; }
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(10px); }
-    to   { opacity: 1; transform: translateY(0); }
-  }
-  .mf-step-label {
-    font-size: 0.78rem;
-    font-weight: 600;
-    color: var(--accent);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 12px;
-  }
-  .mf-question {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 16px;
-    line-height: 1.4;
-  }
-  .mf-options {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-bottom: 16px;
-  }
-  .mf-options.grid2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-  }
-  .mf-opt {
-    background: rgba(255,255,255,0.08);
-    border: 1.5px solid rgba(143,227,255,0.25);
-    border-radius: 10px;
-    padding: 13px 16px;
-    font-family: inherit;
-    font-size: 0.92rem;
-    font-weight: 600;
-    color: #fff;
-    cursor: pointer;
-    text-align: left;
-    transition: background 0.2s, border-color 0.2s, transform 0.1s;
-  }
-  .mf-opt:hover { background: rgba(143,227,255,0.15); border-color: var(--accent); transform: translateY(-1px); }
-  .mf-opt.selected { background: var(--accent); color: var(--hero-bg); border-color: var(--accent); }
-  .mf-opt.full { grid-column: 1 / -1; }
-  .mf-checkbox {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    margin-top: 18px;
-    cursor: pointer;
-  }
-  .mf-checkbox input[type="checkbox"] {
-    width: 17px; height: 17px;
-    margin-top: 2px;
-    accent-color: var(--accent);
-    flex-shrink: 0;
-    cursor: pointer;
-  }
-  .mf-checkbox span {
-    font-size: 0.82rem;
-    color: rgba(255,255,255,0.7);
-    line-height: 1.5;
-  }
-  .mf-error {
-    font-size: 0.82rem;
-    color: #ff8a8a;
-    margin-top: 4px;
-    margin-bottom: 8px;
-    display: block;
-  }
-  .mf-checkbox + .mf-error {
-    margin-top: 8px;
-    margin-bottom: 0;
-  }
-  .form-group.has-error input {
-    box-shadow: 0 0 0 2px rgba(255,100,100,0.5);
-  }
-</style>
-
-<script>
-var answers = {};
-
-function setFieldError(inputId, msg) {
-  var input = document.getElementById(inputId);
-  var group = input.closest('.form-group');
-  group.classList.add('has-error');
-  var existing = group.querySelector('.mf-error');
-  if (existing) existing.remove();
-  if (msg) {
-    var err = document.createElement('span');
-    err.className = 'mf-error';
-    err.textContent = msg;
-    group.appendChild(err);
-  }
-}
-
-function clearFieldError(inputId) {
-  var input = document.getElementById(inputId);
-  var group = input.closest('.form-group');
-  group.classList.remove('has-error');
-  var existing = group.querySelector('.mf-error');
-  if (existing) existing.remove();
-}
-
-// Clear errors on input
-['f_name','f_email','f_phone'].forEach(function(id) {
-  document.addEventListener('DOMContentLoaded', function() {
-    var el = document.getElementById(id);
-    if (el) el.addEventListener('input', function(){ clearFieldError(id); });
-  });
-});
-
-function isValidEmail(email) {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
-}
-
-function isValidPhone(phone) {
-  // Strip spaces, dashes, +47 prefix — then check 8 digits remain
-  var digits = phone.replace(/[\s\-\+]/g, '').replace(/^(0047|47)/, '');
-  return /^\d{8}$/.test(digits);
-}
-
-function nextStep(current) {
-  if (current === 1) {
-    var name  = document.getElementById('f_name').value.trim();
-    var email = document.getElementById('f_email').value.trim();
-    var phone = document.getElementById('f_phone').value.trim();
-    var valid = true;
-
-    if (!name) {
-      setFieldError('f_name', 'Vennligst skriv inn ditt fulle navn.');
-      valid = false;
-    } else { clearFieldError('f_name'); }
-
-    if (!email) {
-      setFieldError('f_email', 'Vennligst skriv inn e-postadressen din.');
-      valid = false;
-    } else if (!isValidEmail(email)) {
-      setFieldError('f_email', 'Ugyldig e-postadresse. Eksempel: navn@epost.no');
-      valid = false;
-    } else { clearFieldError('f_email'); }
-
-    if (!phone) {
-      setFieldError('f_phone', 'Vennligst skriv inn telefonnummeret ditt.');
-      valid = false;
-    } else if (!isValidPhone(phone)) {
-      setFieldError('f_phone', 'Telefonnummeret må ha 8 sifre (norsk nummer).');
-      valid = false;
-    } else { clearFieldError('f_phone'); }
-
-    if (!valid) return;
-  }
-
-  if (current === 4) { submitForm(); return; }
-
-  var from = document.getElementById('step' + current);
-  var to   = document.getElementById('step' + (current + 1));
-  from.classList.remove('active');
-  to.classList.add('active');
-
-  var pct = (current / 4) * 100;
-  document.getElementById('mfBar').style.width = pct + '%';
-}
-
-function selectOpt(el, key, val) {
-  answers[key] = val;
-  var siblings = el.closest('.mf-options').querySelectorAll('.mf-opt');
-  siblings.forEach(function(s){ s.classList.remove('selected'); });
-  el.classList.add('selected');
-}
-
-function submitForm() {
-  var existing = document.getElementById('consentErr');
-  if (existing) existing.remove();
-
-  if (!document.getElementById('f_consent').checked) {
-    var err = document.createElement('p');
-    err.className = 'mf-error';
-    err.id = 'consentErr';
-    err.style.marginTop = '8px';
-    err.textContent = 'Du må godta at vi kan kontakte deg for å gå videre.';
-    document.querySelector('.mf-checkbox').insertAdjacentElement('afterend', err);
-    return;
-  }
-
-  document.getElementById('multiForm').style.display = 'none';
-  document.getElementById('thankYou').style.display = 'block';
-  document.querySelector('.hero').scrollIntoView({behavior:'smooth'});
-}
-</script>
 
 <!-- HOW IT WORKS -->
 <section>
@@ -457,7 +487,7 @@ function submitForm() {
         <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 16 9"/></svg> Fyll inn enkelt skjema</li>
         <li><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="9 12 12 15 16 9"/></svg> Gratis og uforpliktende tjeneste</li>
       </ul>
-      <a href="#" class="btn-blue">Sjekk dine tilbud</a>
+      <a href="#hero" class="btn-blue" onclick="document.querySelector('.hero').scrollIntoView({behavior:'smooth'}); return false;">Sjekk dine tilbud</a>
     </div>
     <div class="col-img"><div class="img-placeholder">📱</div></div>
   </div>
@@ -493,192 +523,77 @@ function submitForm() {
   </div>
 </section>
 
-
-<!-- TESTIMONIALS CAROUSEL -->
-<section style="overflow:hidden; padding-bottom: 60px;">
+<!-- TESTIMONIALS -->
+<section style="overflow:hidden; padding-bottom:60px;">
   <div class="inner">
-    <h2 class="testimonials-title">Tilbakemeldinger fra kunder</h2>
+    <h2 class="section-title">Tilbakemeldinger fra kunder</h2>
   </div>
-
   <div class="carousel-wrap">
     <div class="carousel-track" id="carouselTrack">
-      <div class="c-card">
-        <p>"Var litt tilfeldig at jeg sjekket tilbudet hos dere, men angrer ikke. Fornøyd med den nye datapakken!"</p>
-        <div class="c-author">Lisa Marie</div>
-      </div>
-      <div class="c-card">
-        <p>"Takk for hjelpen! Er fornøyd med datapakken nå 😊"</p>
-        <div class="c-author">Ahmad</div>
-      </div>
-      <div class="c-card">
-        <p>"Veldig enkelt og raskt. Fikk et godt tilbud samme dag jeg sendte inn skjemaet!"</p>
-        <div class="c-author">Marte K.</div>
-      </div>
-      <div class="c-card">
-        <p>"Sparte over 200 kr i måneden på nytt abonnement. Anbefaler alle å sjekke dette!"</p>
-        <div class="c-author">Thomas B.</div>
-      </div>
-      <div class="c-card">
-        <p>"Syntes det var litt rart at det var gratis, men det var det faktisk. Superfornøyd!"</p>
-        <div class="c-author">Ingrid L.</div>
-      </div>
-      <div class="c-card">
-        <p>"Tok bare noen minutter å fylle ut skjemaet, og dagen etter hadde jeg tre tilbud å velge mellom."</p>
-        <div class="c-author">Jonas R.</div>
-      </div>
+      <div class="c-card"><p>"Var litt tilfeldig at jeg sjekket tilbudet hos dere, men angrer ikke. Fornøyd med den nye datapakken!"</p><div class="c-author">Lisa Marie</div></div>
+      <div class="c-card"><p>"Takk for hjelpen! Er fornøyd med datapakken nå 😊"</p><div class="c-author">Ahmad</div></div>
+      <div class="c-card"><p>"Veldig enkelt og raskt. Fikk et godt tilbud samme dag jeg sendte inn skjemaet!"</p><div class="c-author">Marte K.</div></div>
+      <div class="c-card"><p>"Sparte over 200 kr i måneden på nytt abonnement. Anbefaler alle å sjekke dette!"</p><div class="c-author">Thomas B.</div></div>
+      <div class="c-card"><p>"Syntes det var litt rart at det var gratis, men det var det faktisk. Superfornøyd!"</p><div class="c-author">Ingrid L.</div></div>
+      <div class="c-card"><p>"Tok bare noen minutter å fylle ut skjemaet, og dagen etter hadde jeg tre tilbud å velge mellom."</p><div class="c-author">Jonas R.</div></div>
     </div>
     <div class="fade-left"></div>
     <div class="fade-right"></div>
   </div>
-
   <div class="carousel-dots" id="carouselDots"></div>
 </section>
 
-<style>
-  .carousel-wrap {
-    position: relative;
-    width: 100%;
-    overflow: hidden;
-    padding: 8px 0 16px;
-  }
-  .carousel-track {
-    display: flex;
-    gap: 20px;
-    transition: transform 0.5s cubic-bezier(.4,0,.2,1);
-    will-change: transform;
-    padding: 8px 0 12px;
-  }
-  .c-card {
-    background: var(--blue-dark);
-    border-radius: 14px;
-    padding: 28px 30px;
-    min-width: 340px;
-    max-width: 340px;
-    flex-shrink: 0;
-    transition: opacity 0.5s, transform 0.5s;
-  }
-  .c-card p {
-    color: rgba(255,255,255,0.92);
-    font-size: 0.93rem;
-    line-height: 1.65;
-    font-style: italic;
-    margin-bottom: 14px;
-  }
-  .c-author { color: var(--accent); font-weight: 600; font-size: 0.88rem; }
-  .c-card.faded { opacity: 0.22; transform: scale(0.95); }
-  .fade-left, .fade-right {
-    position: absolute;
-    top: 0; bottom: 0;
-    width: 200px;
-    pointer-events: none;
-    z-index: 2;
-  }
-  .fade-left  { left: 0;  background: linear-gradient(to right, var(--bg) 10%, transparent); }
-  .fade-right { right: 0; background: linear-gradient(to left,  var(--bg) 10%, transparent); }
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 24px;
-  }
-  .carousel-dots .cdot {
-    width: 8px; height: 8px;
-    border-radius: 50%;
-    background: rgba(13,111,168,0.2);
-    cursor: pointer;
-    border: none;
-    transition: background 0.2s, transform 0.2s;
-  }
-  .carousel-dots .cdot.active {
-    background: var(--blue-dark);
-    transform: scale(1.35);
-  }
-</style>
+<!-- OM OSS -->
+<section class="om-oss-section" id="om-oss">
+  <div class="two-col">
+    <div class="col-text">
+      <h2>Om oss</h2>
+      <p>Mobilpris er en sammenligningstjeneste som hjelper deg med å finne riktig mobilabonnement til riktig pris. Vi hjelper privatpersoner med å finne et abonnement som faktisk passer, både til ditt forbruk og til lommeboka.</p>
+      <p>Våre rådgivere har lang erfaring med å sammenligne pris, og vi vet at ingen mobilbrukere er helt like. Vårt mål er at du skal få en enklere mobilhverdag, til en hyggelig pris.</p>
+      <a href="#" class="btn-blue" onclick="document.querySelector('.hero').scrollIntoView({behavior:'smooth'}); return false;">Få gratis tilbud</a>
+    </div>
+    <div class="col-img"><div class="img-placeholder">👥</div></div>
+  </div>
+</section>
 
-<script>
-(function() {
-  const track = document.getElementById('carouselTrack');
-  const dotsEl = document.getElementById('carouselDots');
-  const origCards = Array.from(track.children);
-  const total = origCards.length;
-
-  // Clone cards before and after for seamless looping
-  const clonesBefore = origCards.map(c => c.cloneNode(true));
-  const clonesAfter  = origCards.map(c => c.cloneNode(true));
-  clonesBefore.forEach(c => track.insertBefore(c, track.firstChild));
-  clonesAfter.forEach(c => track.appendChild(c));
-
-  const allCards = Array.from(track.children); // 3x total
-  let current = total; // start at real first card (index = total, after clones)
-
-  // Build dots for real cards only
-  origCards.forEach((_, i) => {
-    const d = document.createElement('button');
-    d.className = 'cdot' + (i === 0 ? ' active' : '');
-    d.addEventListener('click', () => goTo(total + i));
-    dotsEl.appendChild(d);
-  });
-
-  function goTo(idx, animate) {
-    if (animate === false) track.style.transition = 'none';
-    else track.style.transition = 'transform 0.5s cubic-bezier(.4,0,.2,1)';
-    current = idx;
-    render();
-  }
-
-  function render() {
-    const cardW = allCards[0].offsetWidth + 20;
-    const viewW = track.parentElement.offsetWidth;
-    const offset = (viewW / 2) - (cardW / 2) - current * cardW;
-    track.style.transform = 'translateX(' + offset + 'px)';
-
-    allCards.forEach((c, i) => {
-      const dist = Math.abs(i - current);
-      c.classList.toggle('faded', dist > 1);
-    });
-
-    // Update dots based on real position
-    const realIdx = ((current - total) % total + total) % total;
-    Array.from(dotsEl.children).forEach((d, i) => d.classList.toggle('active', i === realIdx));
-  }
-
-  // After transition ends, silently jump if we're in clone territory
-  track.addEventListener('transitionend', () => {
-    if (current < total) {
-      goTo(current + total, false);
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        track.style.transition = 'transform 0.5s cubic-bezier(.4,0,.2,1)';
-      }));
-    } else if (current >= total * 2) {
-      goTo(current - total, false);
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        track.style.transition = 'transform 0.5s cubic-bezier(.4,0,.2,1)';
-      }));
-    }
-  });
-
-  let timer = setInterval(() => goTo(current + 1), 3200);
-  const wrap = track.parentElement;
-  wrap.addEventListener('mouseenter', () => clearInterval(timer));
-  wrap.addEventListener('mouseleave', () => { clearInterval(timer); timer = setInterval(() => goTo(current + 1), 3200); });
-
-  let sx = 0;
-  track.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, {passive:true});
-  track.addEventListener('touchend', e => {
-    const dx = e.changedTouches[0].clientX - sx;
-    if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
-  });
-
-  window.addEventListener('resize', () => goTo(current, false));
-  goTo(current, false);
-})();
-</script>
+<!-- KONTAKT -->
+<section class="contact-section" id="kontakt">
+  <div class="contact-grid">
+    <div class="contact-info">
+      <h2>Kontakt oss</h2>
+      <p>Lurer du på noe? Ring oss for en hyggelig prat, eller fyll ut skjemaet så svarer vi deg så fort vi kan.</p>
+      <div class="contact-detail">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.57 3.18 2 2 0 0 1 3.55 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +47 40 00 19 56
+      </div>
+      <div class="contact-detail">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Innspurten 1B, 0663 Oslo
+      </div>
+      <div class="contact-detail">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        info@mobilpris.no
+      </div>
+    </div>
+    <div class="contact-form-wrap">
+      <h3>Hva kan vi hjelpe deg med?</h3>
+      <input class="c-input" type="text" placeholder="Hva er ditt navn?" />
+      <input class="c-input" type="email" placeholder="Hva er din epost?" />
+      <input class="c-input" type="tel" placeholder="Hva er ditt telefonnummer?" />
+      <textarea class="c-input" placeholder="Hva kan vi hjelpe deg med?"></textarea>
+      <button class="btn-blue">
+        Send melding
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
 
 <!-- FOOTER -->
 <footer>
   <div class="footer-top">
     <div>
-      <a href="/" class="footer-logo">
+      <a href="#" class="footer-logo">
         <div class="logo-bars"><span></span><span></span><span></span><span></span></div>
         Mobilpris
       </a>
@@ -688,7 +603,7 @@ function submitForm() {
       </div>
       <div class="footer-ci">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        <span class="cf-email">info@mobilpris.no</span>
+        info@mobilpris.no
       </div>
       <div class="footer-ci">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.57 3.18 2 2 0 0 1 3.55 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 8.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -698,27 +613,127 @@ function submitForm() {
     <div>
       <div class="footer-heading">Navigasjon</div>
       <ul class="footer-nav">
-        <li><a href="/om-oss">Om oss</a></li>
-        <li><a href="/kontakt">Kontakt oss</a></li>
+        <li><a href="#om-oss">Om oss</a></li>
+        <li><a href="#kontakt">Kontakt oss</a></li>
         <li><a href="#">Personvern- og brukervilkår</a></li>
       </ul>
     </div>
   </div>
-    <div class="footer-bottom">
+  <div class="footer-bottom">
     <p>&copy; 2026 Meisel AS. Alle rettigheter reservert.</p>
   </div>
-</footer
+</footer>
 
 <script>
+// ── FORM VALIDATION ──
+var answers = {};
+
+function setFieldError(id, msg) {
+  var input = document.getElementById(id);
+  var group = input.closest('.form-group');
+  group.classList.add('has-error');
+  var ex = group.querySelector('.mf-error');
+  if (ex) ex.remove();
+  if (msg) { var e = document.createElement('span'); e.className='mf-error'; e.textContent=msg; group.appendChild(e); }
+}
+function clearFieldError(id) {
+  var input = document.getElementById(id);
+  if (!input) return;
+  var group = input.closest('.form-group');
+  group.classList.remove('has-error');
+  var ex = group.querySelector('.mf-error'); if (ex) ex.remove();
+}
+function isValidEmail(e) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(e); }
+function isValidPhone(p) { var d = p.replace(/[\s\-\+]/g,'').replace(/^(0047|47)/,''); return /^\d{8}$/.test(d); }
+
+function nextStep(current) {
+  if (current === 1) {
+    var name=document.getElementById('f_name').value.trim();
+    var email=document.getElementById('f_email').value.trim();
+    var phone=document.getElementById('f_phone').value.trim();
+    var valid=true;
+    if (!name) { setFieldError('f_name','Vennligst skriv inn ditt fulle navn.'); valid=false; } else clearFieldError('f_name');
+    if (!email) { setFieldError('f_email','Vennligst skriv inn e-postadressen din.'); valid=false; }
+    else if (!isValidEmail(email)) { setFieldError('f_email','Ugyldig e-postadresse. Eksempel: navn@epost.no'); valid=false; }
+    else clearFieldError('f_email');
+    if (!phone) { setFieldError('f_phone','Vennligst skriv inn telefonnummeret ditt.'); valid=false; }
+    else if (!isValidPhone(phone)) { setFieldError('f_phone','Telefonnummeret må ha 8 sifre (norsk nummer).'); valid=false; }
+    else clearFieldError('f_phone');
+    if (!valid) return;
+  }
+  if (current === 4) { submitForm(); return; }
+  document.getElementById('step'+current).classList.remove('active');
+  document.getElementById('step'+(current+1)).classList.add('active');
+  document.getElementById('mfBar').style.width = (current/4*100)+'%';
+}
+function selectOpt(el, key, val) {
+  answers[key]=val;
+  el.closest('.mf-options').querySelectorAll('.mf-opt').forEach(function(s){s.classList.remove('selected');});
+  el.classList.add('selected');
+}
+function submitForm() {
+  var ex=document.getElementById('consentErr'); if(ex) ex.remove();
+  if (!document.getElementById('f_consent').checked) {
+    var e=document.createElement('p'); e.className='mf-error'; e.id='consentErr'; e.style.marginTop='8px';
+    e.textContent='Du må godta at vi kan kontakte deg for å gå videre.';
+    document.querySelector('.mf-checkbox').insertAdjacentElement('afterend',e); return;
+  }
+  document.getElementById('multiForm').style.display='none';
+  document.getElementById('thankYou').style.display='block';
+  document.querySelector('.hero').scrollIntoView({behavior:'smooth'});
+}
+
+// ── CAROUSEL ──
 (function(){
-  var nav = document.querySelector('nav');
-  var last = window.scrollY;
-  window.addEventListener('scroll', function(){
-    var cur = window.scrollY;
-    if(cur > last && cur > 60){ nav.classList.add('hidden'); }
-    else { nav.classList.remove('hidden'); }
-    last = cur;
-  }, {passive:true});
+  var track=document.getElementById('carouselTrack');
+  var dotsEl=document.getElementById('carouselDots');
+  var orig=Array.from(track.children);
+  var total=orig.length;
+  orig.map(function(c){return c.cloneNode(true);}).forEach(function(c){track.insertBefore(c,track.firstChild);});
+  orig.map(function(c){return c.cloneNode(true);}).forEach(function(c){track.appendChild(c);});
+  var all=Array.from(track.children);
+  var current=total;
+  orig.forEach(function(_,i){
+    var d=document.createElement('button'); d.className='cdot'+(i===0?' active':'');
+    d.addEventListener('click',function(){goTo(total+i);}); dotsEl.appendChild(d);
+  });
+  function goTo(idx,animate){
+    if(animate===false) track.style.transition='none';
+    else track.style.transition='transform 0.5s cubic-bezier(.4,0,.2,1)';
+    current=idx; render();
+  }
+  function render(){
+    var cw=all[0].offsetWidth+20;
+    var vw=track.parentElement.offsetWidth;
+    track.style.transform='translateX('+(vw/2-cw/2-current*cw)+'px)';
+    all.forEach(function(c,i){c.classList.toggle('faded',Math.abs(i-current)>1);});
+    var ri=((current-total)%total+total)%total;
+    Array.from(dotsEl.children).forEach(function(d,i){d.classList.toggle('active',i===ri);});
+  }
+  track.addEventListener('transitionend',function(){
+    if(current<total){goTo(current+total,false);requestAnimationFrame(function(){requestAnimationFrame(function(){track.style.transition='transform 0.5s cubic-bezier(.4,0,.2,1)';});});}
+    else if(current>=total*2){goTo(current-total,false);requestAnimationFrame(function(){requestAnimationFrame(function(){track.style.transition='transform 0.5s cubic-bezier(.4,0,.2,1)';});});}
+  });
+  var timer=setInterval(function(){goTo(current+1);},3200);
+  track.parentElement.addEventListener('mouseenter',function(){clearInterval(timer);});
+  track.parentElement.addEventListener('mouseleave',function(){clearInterval(timer);timer=setInterval(function(){goTo(current+1);},3200);});
+  var sx=0;
+  track.addEventListener('touchstart',function(e){sx=e.touches[0].clientX;},{passive:true});
+  track.addEventListener('touchend',function(e){var dx=e.changedTouches[0].clientX-sx;if(Math.abs(dx)>40)goTo(current+(dx<0?1:-1));});
+  window.addEventListener('resize',function(){goTo(current,false);});
+  goTo(current,false);
+})();
+
+// ── NAV HIDE ON SCROLL ──
+(function(){
+  var nav=document.querySelector('nav');
+  var last=window.scrollY;
+  window.addEventListener('scroll',function(){
+    var cur=window.scrollY;
+    if(cur>last&&cur>60){nav.classList.add('hidden');}
+    else{nav.classList.remove('hidden');}
+    last=cur;
+  },{passive:true});
 })();
 </script>
 </body>
